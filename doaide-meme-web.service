@@ -1,0 +1,16 @@
+[Unit]
+Description=DoAide Meme Web Frontend
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+Group=deploy
+WorkingDirectory=/opt/doaide-meme
+ExecStart=/usr/bin/npx serve dist -s -l tcp://172.18.0.1:3052
+Restart=on-failure
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
