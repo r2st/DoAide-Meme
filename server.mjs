@@ -58,11 +58,16 @@ app.post('/api/generate-caption', rateLimit, async (req, res) => {
       }
     )
     const data = await response.json()
+    if (data.error) {
+      console.error('Gemini API error:', data.error.message)
+      return res.status(502).json({ error: 'AI service temporarily unavailable. Please try again later.' })
+    }
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '[]'
     const jsonMatch = text.match(/\[[\s\S]*\]/)
     const captions = jsonMatch ? JSON.parse(jsonMatch[0]) : []
     res.json({ captions: captions.slice(0, 5) })
-  } catch {
+  } catch (err) {
+    console.error('Caption generation error:', err)
     res.status(500).json({ error: 'Failed to generate captions. Please try again.' })
   }
 })
