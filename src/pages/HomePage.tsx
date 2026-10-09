@@ -143,6 +143,38 @@ export default function HomePage() {
         )}
       </section>
 
+      {/* Free Tools */}
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Free Meme Tools</h2>
+        <p className="text-gray-500 text-center mb-8">No login required. 100% free.</p>
+        <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <a
+            href="/templates"
+            className="block bg-white border border-gray-200 rounded-xl p-6 text-center hover:border-[#F0B429] hover:shadow-lg transition-all no-underline"
+          >
+            <div className="text-3xl mb-3">🖼️</div>
+            <h3 className="font-bold text-gray-900 mb-1">Template Browser</h3>
+            <p className="text-sm text-gray-500">Browse {templates.length}+ meme templates with search and filters.</p>
+          </a>
+          <a
+            href="/custom-meme-creator"
+            className="block bg-white border border-gray-200 rounded-xl p-6 text-center hover:border-[#F0B429] hover:shadow-lg transition-all no-underline"
+          >
+            <div className="text-3xl mb-3">✏️</div>
+            <h3 className="font-bold text-gray-900 mb-1">Custom Meme Creator</h3>
+            <p className="text-sm text-gray-500">Upload any image and add text overlay with classic meme fonts.</p>
+          </a>
+          <a
+            href="/caption-generator"
+            className="block bg-white border border-gray-200 rounded-xl p-6 text-center hover:border-[#F0B429] hover:shadow-lg transition-all no-underline"
+          >
+            <div className="text-3xl mb-3">🤖</div>
+            <h3 className="font-bold text-gray-900 mb-1">AI Caption Generator</h3>
+            <p className="text-sm text-gray-500">Generate funny captions with AI. Pick a topic, get instant ideas.</p>
+          </a>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-gray-900 text-white py-12 px-4 text-center mt-8">
         <h2 className="text-2xl font-bold mb-3">Can't find the right template?</h2>

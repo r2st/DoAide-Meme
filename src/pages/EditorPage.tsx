@@ -41,7 +41,14 @@ export default function EditorPage() {
     [templateId]
   )
 
-  const [textBoxes, setTextBoxes] = useState<TextBox[]>(() => createDefaultTextBoxes(template))
+  const [textBoxes, setTextBoxes] = useState<TextBox[]>(() => {
+    const boxes = createDefaultTextBoxes(template)
+    const topText = searchParams.get('topText')
+    const bottomText = searchParams.get('bottomText')
+    if (topText && boxes.length > 0) boxes[0].text = topText
+    if (bottomText && boxes.length > 1) boxes[1].text = bottomText
+    return boxes
+  })
   const [stickers, setStickers] = useState<StickerItem[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [bgImage, setBgImage] = useState<HTMLImageElement | null>(null)
