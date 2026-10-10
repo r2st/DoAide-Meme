@@ -17,17 +17,31 @@ export default function BlogPostPage() {
       script.type = 'application/ld+json'
       document.head.appendChild(script)
     }
-    script.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: post.title,
-      description: post.description,
-      datePublished: post.date,
-      dateModified: post.date,
-      author: { '@type': 'Organization', name: 'DoAide', url: 'https://doaide.com' },
-      publisher: { '@type': 'Organization', name: 'DoAide Meme', url: 'https://meme.doaide.com' },
-      mainEntityOfPage: `https://meme.doaide.com/blog/${post.slug}`,
-    })
+    const schemas: object[] = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        dateModified: post.date,
+        author: { '@type': 'Organization', name: 'DoAide', url: 'https://doaide.com' },
+        publisher: { '@type': 'Organization', name: 'DoAide Meme', url: 'https://meme.doaide.com' },
+        mainEntityOfPage: `https://meme.doaide.com/blog/${post.slug}`,
+      },
+    ]
+    if (post.faqs?.length) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: post.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
+      })
+    }
+    script.textContent = JSON.stringify(schemas)
 
     return () => {
       script?.remove()
